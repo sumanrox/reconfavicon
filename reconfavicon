@@ -9,27 +9,11 @@ getMD5FaviconHash() {
 
 # Function to fetch the MMH3 hash of a favicon
 getMMH3FaviconHash() {
-
     local url="$1"
     local mmh3hash=$(python3 -c "import requests, mmh3, codecs; response = requests.get('$url'); favicon = codecs.encode(response.content, 'base64'); hash = mmh3.hash(favicon); print(hash)")
     echo "$mmh3hash"
 }
 
-# Function to search a hash in a database
-searchHashInDatabase() {
-    local url="$1"
-    local hash="$2"
-    local database="$3"
-    local filter="$4"
-    
-    local result=$(curl "$database" -s | grep "$hash" | cut -d ',' -f1)
-    if [[ "$result" == "$hash" ]]; then
-        echo -e "[🔥] Found Record in $filter Database" | lolcat
-        echo "$(curl "$database" -s | grep "$hash" | column -t -s ',' --output-separator=' | ' -N $filter)" | lolcat
-        return 0
-    fi
-    return 1
-}
 banner() {
     echo "   ____               _                         ___                            ______             __   __ __   _   __ " | lolcat
     echo "  / __/ ___ _ _  __  (_) ____ ___   ___        / _ \ ___  ____ ___   ___      /_  __/ ___  ___   / /  / //_/  (_) / /_" | lolcat
@@ -53,23 +37,30 @@ reconFaviconHash() {
             local githubRepoDatabaseFilter='Hash,Product/Framework,HTTP Title,Header Information'
             local md5hash=$(getMD5FaviconHash "$url")
             local mmh3hash=$(getMMH3FaviconHash "$url")
-            local stripedMMH3FaviconHash=${mmh3hash//-/}
+            local stripedMMH3FaviconHash=$(echo -e $mmh3hash)
             local owaspFlag=0
             local githubFlag=0
             echo -e "[ ⚡] MD5 Hash  : $md5hash" | lolcat
             echo -e "[ ⚡] MMH3 Hash : $mmh3hash\n" | lolcat
             echo -e "[🔎] Searching Online Database against MD5  Hash : $md5hash" | lolcat
             echo -e "[🔎] Searching Online Database against MMH3 Hash : $stripedMMH3FaviconHash\n" | lolcat
-
-            if [[ -n "$md5hash" && -n "$mmh3hash" ]]; then
-                if searchHashInDatabase "$url" "$md5hash" "$owaspDatabase" "OWASP"; then
+            
+            
+            # Search in OWASP Database
+            if [[ $(curl $owaspDatabase -s | grep $md5hash | cut -d ':' -f1) == $md5hash ]]; then
+                    echo -e "[🔥] Found Record in OWASP Database\n" | lolcat
+                    echo -e "$(curl $owaspDatabase -s | grep $md5hash | column -t -s ':' --output-separator=' | ' -N Hash,Framework)\n" | lolcat
                     owaspFlag=1
-                fi
-                if searchHashInDatabase "$url" "$stripedMMH3FaviconHash" "$githubRepoDatabase" "$githubRepoDatabaseFilter"; then
-                    githubFlag=1
-                fi
             fi
-
+            
+            # Search in Github Repo Database
+            if [[ $(curl $githubRepoDatabase -s | grep $mmh3hash | cut -d ',' -f1) == $mmh3hash ]]; then
+                    echo -e "[🔥] Found Record in Github Repo Database" | lolcat
+                    local data=$(curl $githubRepoDatabase -s | grep $mmh3hash)
+                    echo $data | column -t -s ',' --output-separator=' | ' -N 'Hash,Product/Framework,HTTP Title,Header Information'
+                    githubFlag=1
+            fi
+             
             if [[ $owaspFlag == 0 && $githubFlag == 0 ]]; then
                 echo -e "[🥲] No Results Found in current Database" | lolcat
             fi
