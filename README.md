@@ -1,8 +1,7 @@
 # reconfavicon - Yet Another Favicon Recon Tool :)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **reconfavicon** is a Favicon Investigation Toolkit that allows you to analyze and gather information about website favicons.
-
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ![Product-Video](./images/product-video.gif)
 
