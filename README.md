@@ -9,11 +9,12 @@
 ## Table of Contents
 
 - [About](#about)
+- [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
+- [Uninstall](#uninstall)
 - [License](#license)
 - [Contributions](#contributions)
 - [Acknowledgements](#acknowledgements)
@@ -21,6 +22,11 @@
 ## About
 
 **reconfavicon** is a powerful tool for investigating website favicons. It helps you extract and analyze favicon data, including MD5 and MMH3 hashes, and allows you to search for these hashes in online databases. Additionally, it provides queries for Shodan and ZoomEye to further investigate websites using these favicons.
+
+### Features
+- Extract MD5 and MMH3 hashes of favicons
+- Search for favicon hashes in online databases
+- Generate queries for Shodan and ZoomEye
 
 ## Getting Started
 
@@ -52,11 +58,10 @@ sudo ./install_script.sh
 ```bash
 reconfavicon "https://www.example.com/favicon.ico"
 ```
-
-### Features
-- Extract MD5 and MMH3 hashes of favicons
-- Search for favicon hashes in online databases
-- Generate queries for Shodan and ZoomEye
+### Uninstall
+```bash
+sudo rm /usr/local/bin/reconfavicon
+```
 
 ### License
 This project is licensed under the MIT License - see the LICENSE file for details.
