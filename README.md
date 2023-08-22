@@ -1,5 +1,5 @@
 # reconfavicon - Yet Another Favicon Recon Tool :)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)](Shell) [![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](Python) 
 
 **reconfavicon** is a Favicon Investigation Toolkit that allows you to analyze and gather information about website favicons.
 
