@@ -73,3 +73,7 @@ Contributions to ***reconfavicon*** are welcome!
 
 ### Acknowledgements
 Thanks to https://github.com/sansatart for providing a lookup table
+
+
+### Made with ❤️ by Suman Roy
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/sumanrox/)
