@@ -53,7 +53,7 @@ tqdm==4.64.1
 
 ```bash
 # One line install command
-curl -s https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh|sudo bash
+curl -sL https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh | sudo bash
 ```
 
 ### Uninstall
