@@ -52,12 +52,8 @@ tqdm==4.64.1
 - Follow these steps to install **reconfavicon**:
 
 ```bash
-# Clone the reconfavicon repository
-git clone https://github.com/sumanrox/reconfavicon.git
-# Navigate to the project directory
-cd reconfavicon
-# Run the installation script
-sudo ./install.sh
+# One line install command
+curl -s https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh|sudo bash
 ```
 
 ### Uninstall
