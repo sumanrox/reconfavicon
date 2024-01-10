@@ -59,5 +59,9 @@ curl -sL https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh
 ```
 sudo rm /usr/local/bin/reconfavicon -rf
 ```
+- Remove the alias from bashrc
+```
+alias python3="python3 /usr/local/bin/reconfavicon/reconfavicon.py"
+```
 
 
