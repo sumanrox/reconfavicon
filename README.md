@@ -53,6 +53,17 @@ tqdm==4.64.1
 ```bash
 curl -sL https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh | sudo bash
 ```
+- Make an alias (zsh)
+```bash
+# Create alias in ~/.zshrc or inside ~/.bashrc
+alias reconfavicon="python3 /usr/local/bin/reconfavicon/reconfavicon.py"
+```
+- Source it
+```bash
+source ~/.zshrc
+# Or
+source ~/.bashrc
+```
 
 ### Uninstall
 - Very simple uninstallation process
