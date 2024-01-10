@@ -35,5 +35,4 @@ pip3 install -r "$INSTALL_DIR/requirements.txt"
 # make it executable
 chmod +x "$INSTALL_DIR/reconfavicon.py"
 
-echo "Installation complete. You can now use the script by typing:"
-echo "$SCRIPT_NAME"
+echo "Installation complete"
