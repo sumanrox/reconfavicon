@@ -35,9 +35,5 @@ pip3 install -r "$INSTALL_DIR/requirements.txt"
 # make it executable
 chmod +x "$INSTALL_DIR/reconfavicon.py"
 
-# Create alias in ~/.bashrc
-echo 'alias reconfavicon="python3 /usr/local/bin/reconfavicon/reconfavicon.py"'>> $HOME/.bashrc
-source ~/.bashrc
-
 echo "Installation complete. You can now use the script by typing:"
 echo "$SCRIPT_NAME"
