@@ -85,7 +85,7 @@ if __name__ == "__main__":
                         threads=args.threads
                     else:
                         threads=20
-                    print(f"🍲 Saving as\t\t: {colored(f'{os.getcwd()}/{defaultFilename}','light_yellow')}")
+                    print(f"🍲 Saving as\t\t: {colored(f'{os.getcwd()}/{defaultFilename}','yellow')}")
                     with open(defaultFilename,'w') as file:
                         header=f"URL,MMH3-Hash,MD5-Hash\n"
                         file.write(header)
