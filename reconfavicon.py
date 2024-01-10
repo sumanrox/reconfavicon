@@ -73,6 +73,8 @@ if __name__ == "__main__":
         parser.add_argument("--threads","-t",dest="threads",required=False,help="Used with -f switch, will ignore other switches # (Default 20 Threads)")
         parser.add_argument("--update","-up",action="store_true",required=False,help="Update Lookup Table")
         args=parser.parse_args()
+        # Check if the dataset exist
+        checkFiles()
         if not args.no_banner:
             displayBanner()
         if args.update and args.url!=None:
@@ -114,8 +116,6 @@ if __name__ == "__main__":
            print(colored(f'🔑 MD5\t\t\t: {md5}\n🔑 MMH3\t\t\t: {mmh3}','cyan')) if md5 and mmh3 else print(f"🔑 MMH3\t\t\t: {mmh3}") if mmh3 else print(f"🔑 MD5\t\t\t: {md5}")
         else:
             print(colored("No results found, favicon missing/has different path!",'red'))
-        # Check if the dataset exist
-        checkFiles()
         # Lookup
         mmh3Lookup(mmh3=mmh3)
         md5Lookup(md5=md5)
