@@ -34,7 +34,7 @@ pip3 install -r "$INSTALL_DIR/requirements.txt"
 
 # make it executable
 chmod +x "$INSTALL_DIR/reconfavicon.py"
-sudo chown -R --from=root $(whoami) "$INSTALL_DIR"
+sudo chown -R --from=root $(whoami) "$INSTALL_DIR/shared"
 
 echo "Installation complete"
 echo "Make Aliases"
