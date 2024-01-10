@@ -56,7 +56,7 @@ curl -sL https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh
 - Make an alias (zsh)
 ```bash
 # Create alias in ~/.zshrc or inside ~/.bashrc
-alias reconfavicon="python3 /usr/local/bin/reconfavicon/reconfavicon.py"
+alias reconfavicon="python3 /opt/reconfavicon/reconfavicon.py"
 ```
 - Source it
 ```bash
