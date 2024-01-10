@@ -21,7 +21,7 @@ def displayBanner():
     ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝ ver.2024                                                                                              
     by Suman Roy | Made with ♥
     """
-    print(colored(banner,'light_red'))
+    print(colored(banner,'red'))
 
 # Check internet connectivity
 def Connected(hostname):
