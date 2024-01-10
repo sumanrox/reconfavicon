@@ -4,7 +4,7 @@
 SCRIPT_NAME="reconfavicon"
 
 # Define the installation directory (where the script will be placed)
-INSTALL_DIR="/usr/local/bin/$SCRIPT_NAME"
+INSTALL_DIR="/opt/$SCRIPT_NAME"
 
 # Check if the user has root privileges (sudo)
 if [ "$EUID" -ne 0 ]; then
@@ -34,5 +34,6 @@ pip3 install -r "$INSTALL_DIR/requirements.txt"
 
 # make it executable
 chmod +x "$INSTALL_DIR/reconfavicon.py"
+chmod +w-x "$INSTALL_DIR/shared"
 
 echo "Installation complete"
