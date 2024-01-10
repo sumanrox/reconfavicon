@@ -61,7 +61,7 @@ sudo rm /usr/local/bin/reconfavicon -rf
 ```
 - Remove the alias from bashrc
 ```
-alias python3="python3 /usr/local/bin/reconfavicon/reconfavicon.py"
+alias reconfavicon="python3 /usr/local/bin/reconfavicon/reconfavicon.py"
 ```
 
 
