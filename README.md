@@ -49,10 +49,8 @@ tqdm==4.64.1
 
 ### Installation
 
-- Follow these steps to install **reconfavicon**:
-
+- One line install command
 ```bash
-# One line install command
 curl -sL https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh | sudo bash
 ```
 
