@@ -41,10 +41,18 @@
 ```bash
 curl -sL https://raw.githubusercontent.com/sumanrox/reconfavicon/main/install.sh | sudo bash
 ```
-- ##### Make an alias (zsh)
+- ##### Or you can manually download the project repo and run the program
+```bash
+git clone https://github.com/sumanrox/reconfavicon.git
+cd reconfavicon
+python reconfavicon.py --url https://example.com
+```
+- ##### Make an alias ( zsh | bashrc )
 ```bash
 # Create alias in ~/.zshrc or inside ~/.bashrc
 alias reconfavicon="python3 /opt/reconfavicon/reconfavicon.py"
+# Or if you have downloaded in a different path
+alias reconfavicon="python3 /path/to_project/reconfavicon/reconfavicon.py"
 ```
 - ##### Source it
 ```bash
@@ -53,7 +61,7 @@ source ~/.zshrc
 source ~/.bashrc
 ```
 ### ⚠️ Caution
-- The installer makes ```/var/opt/reconfavicon/shared``` folder writeable for everyone
+- The auto installer makes ```/var/opt/reconfavicon/shared``` folder writeable for everyone
 - You may want to take the ownership rather than giving it root privileges
 - ##### Remedy
 ```bash
