@@ -35,6 +35,6 @@ pip3 install -r "$INSTALL_DIR/requirements.txt"
 # make it executable
 chmod +x "$INSTALL_DIR/reconfavicon.py"
 chmod -x "$INSTALL_DIR/shared"
-chmod -w "$INSTALL_DIR/shared"
+chmod +w "$INSTALL_DIR/shared"
 
 echo "Installation complete"
