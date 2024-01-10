@@ -65,6 +65,16 @@ source ~/.zshrc
 source ~/.bashrc
 ```
 
+### Caution
+- The installer makes /var/opt/reconfavicon/shared folder writeable for everyone
+- You may want to take the ownership rather than giving it root privileges
+##### Remedy
+```bash
+sudo chown -R $(whoami) /opt/reconfavicon
+chmod 700 /opt/reconfavicon/shared
+```
+
+
 ### Uninstall
 - Very simple uninstallation process
 ```
