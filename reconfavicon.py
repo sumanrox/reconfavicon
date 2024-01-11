@@ -86,7 +86,7 @@ if __name__ == "__main__":
             displayBanner()
         if args.update and args.url!=None:
             update()
-            selfUpdate()
+            #selfUpdate()
         elif args.urllists:
                 try:
                     if args.threads:
@@ -113,7 +113,7 @@ if __name__ == "__main__":
                 exit(0)
         elif args.update and args.url is None:
             update()
-            selfUpdate()
+            #selfUpdate()
             exit()
         else:
             print("\n")
