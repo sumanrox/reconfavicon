@@ -48,15 +48,12 @@ class Server:
         
 def processURL(line):
     try:
+        if not line.strip():
+            return
         with open(f'{os.getcwd()}/{defaultFilename}', 'a') as file:
             data = Server(url=line.strip(), port=None)
-            data_dict = {
-                "Target": f"{data.target}",
-                "MMH3": f"{data.mmh3}",
-                "MD5": f"{data.md5}",
-            }
-            for key, values in data_dict.items():
-                file.write(f"{values},")
+            if (data.md5!=None or data.mmh3 !=None):
+                file.write(f"{data.target},{data.mmh3},{data.md5}")
             file.write("\n")
     except Exception as e:
         # Write errors to a separate file

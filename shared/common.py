@@ -1,7 +1,7 @@
 
 from .libraries import timedelta,timer,colored,socket,BeautifulSoup,requests,os
 from pandas import DataFrame,read_csv,notna,NA
-
+import subprocess
 remoteServer='one.one.one.one'
 scriptLocation=os.path.dirname(os.path.realpath(__file__))
 shodanDataset=f"{scriptLocation}/shodan-dataset.csv"
@@ -128,6 +128,13 @@ def update():
     fetchFile(shodanOnlineData)
     optimize(shodanDataset)
     fetchFile(OWASPOnlineData)
+    gitPullCommand = ["git", "pull"]
+    gitPullCommand.extend(["-C", scriptLocation])
+    try:
+        subprocess.run(gitPullCommand, check=True)
+        print("Git pull completed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error during Git pull: {e}")
     
     
 def generateCommands(mmh3,md5):
