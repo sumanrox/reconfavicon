@@ -62,14 +62,13 @@ def processURL(line):
 
 def selfUpdate():
     mainLocation=os.path.dirname(os.path.realpath(__file__))
-    # gitPullCommand = ["git", "pull"]
-    # gitPullCommand.extend(["-C", mainLocation])
-    # try:
-    #     subprocess.run(gitPullCommand, check=True)
-    #     print("Update successfull.")
-    # except subprocess.CalledProcessError as e:
-    #     print(f"Error during Git pull: {e}")
-    print(mainLocation)
+    gitPullCommand = ["git", "pull"]
+    gitPullCommand.extend(["-C", mainLocation])
+    try:
+        subprocess.run(gitPullCommand, check=True)
+        print("Update successfull.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error during Git pull: {e}")
 # Entry Point
 if __name__ == "__main__":
     try:
