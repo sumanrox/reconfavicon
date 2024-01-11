@@ -4,6 +4,7 @@ from shared.lookup import mmh3Lookup, md5Lookup
 from concurrent.futures import ThreadPoolExecutor
 from shared.common import displayBanner, update, checkFiles, generateCommands, defaultFilename,colored
 from tqdm import tqdm
+import subprocess
 # Store target details
 class Server:
     def __init__(self, url=None, port=None):
@@ -59,6 +60,16 @@ def processURL(line):
         # Write errors to a separate file
         print(f"Error Writing Files : {e}")
 
+def selfUpdate():
+    mainLocation=os.path.dirname(os.path.realpath(__file__))
+    # gitPullCommand = ["git", "pull"]
+    # gitPullCommand.extend(["-C", mainLocation])
+    # try:
+    #     subprocess.run(gitPullCommand, check=True)
+    #     print("Update successfull.")
+    # except subprocess.CalledProcessError as e:
+    #     print(f"Error during Git pull: {e}")
+    print(mainLocation)
 # Entry Point
 if __name__ == "__main__":
     try:
@@ -76,6 +87,7 @@ if __name__ == "__main__":
             displayBanner()
         if args.update and args.url!=None:
             update()
+            selfUpdate()
         elif args.urllists:
                 try:
                     if args.threads:
@@ -102,6 +114,7 @@ if __name__ == "__main__":
                 exit(0)
         elif args.update and args.url is None:
             update()
+            selfUpdate()
             exit()
         else:
             print("\n")
