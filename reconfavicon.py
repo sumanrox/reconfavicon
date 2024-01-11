@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 from shared.common import displayBanner, update, checkFiles, generateCommands, defaultFilename,colored
 from tqdm import tqdm
 import subprocess
+import threading
 # Store target details
 class Server:
     def __init__(self, url=None, port=None):
@@ -61,14 +62,26 @@ def processURL(line):
         print(f"Error Writing Files : {e}")
 
 def selfUpdate():
-    mainLocation=os.path.dirname(os.path.realpath(__file__))
-    gitPullCommand = ["git", "pull"]
-    gitPullCommand.extend(["-C", mainLocation])
     try:
-        subprocess.run(gitPullCommand, check=True)
-        print("Update successfull.")
-    except subprocess.CalledProcessError as e:
-        print(f"Error during Git pull: {e}")
+        mainLocation = os.path.dirname(os.path.realpath(__file__))
+
+        def threadUpdate():
+            os.chdir(mainLocation)
+            gitPullCommand = ["git", "pull"]
+            try:
+                subprocess.run(gitPullCommand, check=True)
+                print("Update successful.")
+            except subprocess.CalledProcessError as e:
+                print(f"Error during Git pull: {e}")
+
+        gitPullThread = threading.Thread(target=threadUpdate)
+        gitPullThread.start()
+        gitPullThread.join()  # Wait for the thread to finish before continuing
+
+    except Exception as ex:
+        print(f"An error occurred during the update process: {ex}")
+    
+        
 # Entry Point
 if __name__ == "__main__":
     try:
@@ -86,7 +99,7 @@ if __name__ == "__main__":
             displayBanner()
         if args.update and args.url!=None:
             update()
-            #selfUpdate()
+            selfUpdate()
         elif args.urllists:
                 try:
                     if args.threads:
@@ -113,7 +126,7 @@ if __name__ == "__main__":
                 exit(0)
         elif args.update and args.url is None:
             update()
-            #selfUpdate()
+            selfUpdate()
             exit()
         else:
             print("\n")
