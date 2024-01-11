@@ -4,6 +4,7 @@ from pandas import DataFrame,read_csv,notna,NA
 import subprocess
 remoteServer='one.one.one.one'
 scriptLocation=os.path.dirname(os.path.realpath(__file__))
+mainLocation=f"{scriptLocation}/../"
 shodanDataset=f"{scriptLocation}/shodan-dataset.csv"
 OWASPDataset=f"{scriptLocation}/owasp-dataset.txt"
 shodanOnlineData="https://raw.githubusercontent.com/sansatart/scrapts/master/shodan-favicon-hashes.csv"
@@ -129,7 +130,7 @@ def update():
     optimize(shodanDataset)
     fetchFile(OWASPOnlineData)
     gitPullCommand = ["git", "pull"]
-    gitPullCommand.extend(["-C", scriptLocation])
+    gitPullCommand.extend(["-C", mainLocation])
     try:
         subprocess.run(gitPullCommand, check=True)
         print("Git pull completed successfully.")
