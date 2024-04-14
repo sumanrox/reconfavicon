@@ -3,6 +3,8 @@ from shared.libraries import argparse, requests, exit, mmh3, md5, os,codecs
 from shared.lookup import mmh3Lookup, md5Lookup
 from concurrent.futures import ThreadPoolExecutor
 from shared.common import displayBanner, update, checkFiles, generateCommands, defaultFilename,colored
+import tldextract
+import shodan
 from tqdm import tqdm
 import subprocess
 import threading
@@ -80,6 +82,43 @@ def selfUpdate():
 
     except Exception as ex:
         print(f"An error occurred during the update process: {ex}")
+        
+def captureIPs(inputString=None,hash=None,output=None,apiKey=None) -> None:
+    def checkURL(input) -> bool:
+        if str(input).startswith("https://") or str(input).startswith("http://"):
+            return True
+        else:
+            return False
+    
+    if inputString is None or hash is None or apiKey is None:
+        print("Requires 2 Parameters for this operation eg : --url https://google.com --hash 708578229 --apiKey $SHODAN_API")
+        exit(0)
+    
+    domain=inputString if checkURL(input=inputString) is False else f"{tldextract.extract(inputString).domain}.{tldextract.extract(inputString).suffix}"
+    hashLookup=str(hash)
+    
+    api=shodan.Shodan(apiKey)
+    try:
+        print(f"🔥 Capturing  IPs.. -> {domain}")
+        query=f'org:"{domain}" http.favicon.hash:{hashLookup}'
+        results = api.search(query, facets={'ip_str': None, 'port': None})
+        ipPortLists = [f"{result['ip_str']}:{result['port']}" for result in results['matches']]
+        
+        # Writing the results to a file
+        
+        filename =output if output is not None else f"{domain}_{hashLookup}.txt" 
+        with open(filename, 'w') as f:
+            for ip_port in ipPortLists:
+                f.write(ip_port + '\n')
+
+        print(f"🍲 Saving as\t\t: {colored(f'{os.getcwd()}/{filename}','yellow')}")
+
+    except shodan.APIError as e:
+        print(f"😞 Error: {e}")
+    except Exception as e:
+        print(f"😞 Error Looking Up IP's : {e}")
+    except KeyboardInterrupt:
+        exit(0)
     
         
 # Entry Point
@@ -92,6 +131,9 @@ if __name__ == "__main__":
         parser.add_argument("--file","-f",dest="urllists",required=False,help="File containing list of urls, fetches only hashes, will ignore other switches")
         parser.add_argument("--threads","-t",dest="threads",required=False,help="Used with -f switch, will ignore other switches # (Default 20 Threads)")
         parser.add_argument("--update","-up",action="store_true",required=False,help="Update Lookup Table")
+        parser.add_argument("--hash",dest="hash",required=False,help="Capture All IP addresses associated with an organisation's favicon hash")
+        parser.add_argument("--output","-o",dest="output",help="Filename for saving results",required=False)
+        parser.add_argument("--apiKey",dest="apiKey",help="Shodan API Key or Environment Variable containing Shodan API Key",required=True)
         args=parser.parse_args()
         # Check if the dataset exist
         checkFiles()
@@ -100,6 +142,9 @@ if __name__ == "__main__":
         if args.update and args.url!=None:
             update()
             selfUpdate()
+        if args.hash and args.url and args.apiKey:
+            captureIPs(hash=args.hash,inputString=args.url,output=args.output if args.output else None,apiKey=args.apiKey)
+            exit(0)
         elif args.urllists:
                 try:
                     if args.threads:
