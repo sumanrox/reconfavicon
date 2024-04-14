@@ -78,19 +78,19 @@ reconfavicon -u https://example.com
 ```bash
 reconfavicon -f urls.txt
 ```
-- ##### More parameters
-```
-  -h, --help            show this help message and exit
-  --url URL, -u URL     Server URL or IP, eg : http://example.com
-  --port PORT, -p PORT  Server Port, eg: 8080
-  --no-banner, -n       Prevents the Banner from loading
-  --file URLLISTS, -f URLLISTS
-                        File containing list of urls, fetches only hashes, will ignore other switches
-  --threads THREADS, -t THREADS
-                        Used with -f switch, will ignore other switches # (Default 20 Threads)
-  --update, -up         Update Lookup Table
+### Available Arguments
 
-```
+- `-h, --help`: show this help message and exit
+- `--url URL, -u URL`: Server URL or IP, eg: http://example.com
+- `--port PORT, -p PORT`: Server Port, eg: 8080
+- `--no-banner, -n`: Prevents the Banner from loading
+- `--file URLLISTS, -f URLLISTS`: File containing list of urls, fetches only hashes, will ignore other switches
+- `--threads THREADS, -t THREADS`: Used with -f switch, will ignore other switches (Default 20 Threads)
+- `--update, -up`: Update Lookup Table
+- `--hash`: Capture All IP addresses associated with an organisation's favicon hash
+- `--output FILENAME, -o FILENAME`: Filename for saving results
+- `--apiKey API_KEY`: Shodan API Key or Environment Variable containing Shodan API Key (required)
+
 
 ### 🚧 Uninstall
 - Very simple uninstallation process
