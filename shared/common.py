@@ -1,4 +1,5 @@
-
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 from .libraries import timedelta,timer,colored,socket,BeautifulSoup,requests,os
 from pandas import DataFrame,read_csv,notna,NA
 import subprocess
