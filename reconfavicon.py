@@ -133,7 +133,7 @@ if __name__ == "__main__":
         parser.add_argument("--update","-up",action="store_true",required=False,help="Update Lookup Table")
         parser.add_argument("--hash",dest="hash",required=False,help="Capture All IP addresses associated with an organisation's favicon hash")
         parser.add_argument("--output","-o",dest="output",help="Filename for saving results",required=False)
-        parser.add_argument("--apiKey",dest="apiKey",help="Shodan API Key or Environment Variable containing Shodan API Key",required=True)
+        parser.add_argument("--apiKey",dest="apiKey",help="Shodan API Key or Environment Variable containing Shodan API Key")
         args=parser.parse_args()
         # Check if the dataset exist
         checkFiles()
@@ -142,9 +142,13 @@ if __name__ == "__main__":
         if args.update and args.url!=None:
             update()
             selfUpdate()
-        if args.hash and args.url and args.apiKey:
-            captureIPs(hash=args.hash,inputString=args.url,output=args.output if args.output else None,apiKey=args.apiKey)
-            exit(0)
+        if args.hash and args.url:
+            if not args.apiKey:
+                print(f"😞 Pass the Shodan API Key!")
+                exit(0)
+            else:
+                captureIPs(hash=args.hash,inputString=args.url,output=args.output if args.output else None,apiKey=args.apiKey)
+                exit(0)
         elif args.urllists:
                 try:
                     if args.threads:
