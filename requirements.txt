@@ -1,6 +1,8 @@
-beautifulsoup4==4.9.3
-mmh3==4.1.0
-pandas==1.5.3
-Requests==2.31.0
-termcolor==1.1.0
-tqdm==4.64.1
+beautifulsoup4
+mmh3
+pandas
+Requests
+shodan
+termcolor
+tldextract
+tqdm
